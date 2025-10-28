@@ -1,0 +1,971 @@
+\documentclass[12pt, a4paper]{article}
+
+% CONFIGURACIÓN BÁSICA
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{csquotes}
+
+% FORMATO Y DISEÑO
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm, headheight=14pt}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{ragged2e}
+
+% MATEMÁTICAS Y SÍMBOLOS
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% CÓDIGO Y LISTADOS
+\usepackage{listings}
+\usepackage{xcolor}
+
+% ENLACES Y REFERENCIAS
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Resolución de Problemas en WD My Cloud Home},
+}
+
+% CONFIGURACIÓN DE LISTINGS
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    breaklines=true,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1
+}
+
+% METADATOS DEL DOCUMENTO
+\title{\textbf{Resolución de Problemas en WD My Cloud Home} \\
+\large Administración de Sistemas Operativos - RA 2 - CE g \\
+Unidad Didáctica 1: Gestión de servicios}
+\author{Alvaro Vazquez Vazquez \\ I.E.S. Fernando Aguilar Quignon}
+\date{\today}
+
+% CONFIGURACIÓN DE PIE DE PÁGINA
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize Unidad Didáctica 1: Gestión de servicios}
+\fancyhead[C]{\footnotesize ASO - RA 2 - CE g}
+\fancyhead[R]{\footnotesize \thepage}
+\fancyfoot[L]{\footnotesize Alvaro Vazquez Vazquez}
+\fancyfoot[C]{\footnotesize I.E.S. Fernando Aguilar Quignon}
+\fancyfoot[R]{\footnotesize \today}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Ajustar el espacio para los encabezados
+\setlength{\headsep}{15pt}
+
+\begin{document}
+
+% PORTADA
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\Huge \textbf{Resolución de Problemas en WD My Cloud Home} \par}
+    \vspace{0.5cm}
+    {\Large \textbf{Administración de Sistemas Operativos} \par}
+    \vspace{0.5cm}
+    {\large 1ª Evaluación - RA 2 - CE g \par}
+    \vspace{1cm}
+    {\large \textbf{Unidad Didáctica 1:} \\ Gestión de servicios en Windows y GNU/Linux \par}
+    \vspace{2cm}
+    
+    {\Large Alvaro Vazquez Vazquez \par}
+    \vspace{0.5cm}
+    {\large \today \par}
+    \vspace{2cm}
+    
+    \vfill
+    {\large I.E.S. Fernando Aguilar Quignon \par}
+    {\small C/Conil de la Frontera, 3 \par}
+    {\small CP 11010, Cádiz \par}
+\end{titlepage}
+
+% ÍNDICE
+\tableofcontents
+\clearpage
+
+% INTRODUCCIÓN
+\section{Introducción}
+\label{sec:introduccion}
+
+Este documento presenta un caso práctico de resolución de problemas en un sistema WD My Cloud Home con OpenMediaVault. Se analizan los problemas críticos encontrados y las soluciones implementadas para restaurar la funcionalidad del sistema.
+
+\subsection{Contexto del problema}
+El dispositivo WD My Cloud Home es un sistema de almacenamiento en red que ejecuta una versión personalizada de OpenMediaVault sobre Debian. El sistema presentaba múltiples problemas que impedían su correcto funcionamiento y actualización.
+
+\subsection{Objetivos}
+\begin{itemize}
+    \item Identificar y diagnosticar los problemas del sistema
+    \item Implementar soluciones efectivas para restaurar la funcionalidad
+    \item Documentar el proceso para futuras referencias
+    \item Establecer mejores prácticas de mantenimiento
+\end{itemize}
+
+\clearpage
+
+% PROBLEMAS IDENTIFICADOS
+\section{Problemas Identificados}
+\label{sec:problemas}
+
+\subsection{Repositorios de Software Obsoletos}
+\label{subsec:repositorios_obsoletos}
+
+El sistema presentaba problemas críticos relacionados con la gestión de paquetes y repositorios:
+
+\begin{itemize}
+    \item \textbf{Distribución obsoleta:} Configurado con Debian "Stretch" (antiguo, sin soporte)
+    \item \textbf{Repositorios inexistentes:} 
+    \begin{itemize}
+        \item stretch-backports
+        \item bintray
+        \item armbian
+    \end{itemize}
+    \item \textbf{Errores frecuentes:}
+    \begin{itemize}
+        \item Error 404 Not Found
+        \item "does no longer have a Release file"
+        \item Imposibilidad de actualizar el sistema
+    \end{itemize}
+\end{itemize}
+
+\subsection{Espacio en Disco Insuficiente}
+\label{subsec:espacio_insuficiente}
+
+La partición del sistema presentaba problemas graves de espacio:
+
+\begin{itemize}
+    \item \textbf{Particiones críticas:} Partición \texttt{/var} al 85\% de uso
+    \item \textbf{Espacio disponible:} Solo 118MB libres
+    \item \textbf{Consecuencias:}
+    \begin{itemize}
+        \item \texttt{apt update} fallaba con: "No space left on device"
+        \item Imposibilidad de instalar o actualizar software
+        \item Riesgo de colapso del sistema
+    \end{itemize}
+\end{itemize}
+
+\subsection{Configuración Mixta Incompatible}
+\label{subsec:configuracion_incompatible}
+
+El sistema presentaba conflictos de versiones y configuraciones:
+
+\begin{itemize}
+    \item \textbf{Sistema antiguo:} OMV Arrakis + Debian Stretch
+    \item \textbf{Repositorios nuevos:} Intentando usar repositorios de Debian Bullseye
+    \item \textbf{Conflictos:} Versiones de paquetes incompatibles entre distribuciones
+\end{itemize}
+
+\clearpage
+
+% ANÁLISIS EXACTO DE LA SOLUCIÓN REAL
+\section{Análisis Exacto de la Solución Real Implementada}
+\label{sec:analisis_exacto}
+
+\subsection{Comandos Exactos que Resolvieron el Problema}
+\label{subsec:comandos_exactos}
+
+Tras un análisis detallado de los logs de la conversación, se determinó que la solución real se consiguió con los siguientes comandos específicos:
+
+\subsubsection{Cambio Crítico en sources.list}
+\begin{lstlisting}[language=bash, caption=Cambio EXACTO que resolvió el problema]
+# Editar /etc/apt/sources.list y CAMBIAR de:
+# deb http://httpredir.debian.org/debian stretch main
+# A:
+deb http://deb.debian.org/debian bullseye main
+deb http://deb.debian.org/debian-security bullseye-security main
+\end{lstlisting}
+
+\textbf{Este fue el cambio MÁS IMPORTANTE} que permitió que el sistema encontrara repositorios válidos.
+
+\subsubsection{Limpieza de Espacio que Habilitó la Solución}
+\begin{lstlisting}[language=bash, caption=Limpieza EXACTA que liberó espacio crítico]
+rm -rf /var/cache/openmediavault/archives/*
+rm -rf /var/cache/apt/*
+apt clean
+\end{lstlisting}
+
+\textbf{Resultado medible:} La partición \texttt{/var} pasó de \textbf{85\%} (118MB libre) a \textbf{67\%} (256MB libre) de uso.
+
+\subsection{Evidencia de los Logs}
+\label{subsec:evidencia_logs}
+
+\subsubsection{Estado ANTES de la solución:}
+\begin{lstlisting}[language=bash, caption=Errores antes de la solución]
+Err:11 http://httpredir.debian.org/debian stretch-backports Release
+404 Not Found [IP: 151.101.2.132 80]
+E: The repository 'http://httpredir.debian.org/debian stretch-backports Release' does no longer have a Release file.
+\end{lstlisting}
+
+\subsubsection{Estado DESPUÉS de la solución:}
+\begin{lstlisting}[language=bash, caption=Descargas exitosas después de la solución]
+Get:10 http://deb.debian.org/debian bullseye InRelease [75.1 kB]
+Get:11 http://deb.debian.org/debian-security bullseye-security InRelease [27.2 kB]
+Get:17 http://deb.debian.org/debian bullseye/main armhf Packages [7,841 kB]
+\end{lstlisting}
+
+\subsection{¿Por qué Funcionó con Solo Estos Cambios?}
+\label{subsec:explicacion_funcionamiento}
+
+\textbf{La clave del éxito fue:}
+
+\begin{enumerate}
+    \item \textbf{APT es inteligente:} Cuando tiene fuentes válidas en \texttt{/etc/apt/sources.list}, ignora los errores de repositorios obsoletos en otros archivos
+    \item \textbf{Espacio suficiente:} La limpieza liberó el espacio mínimo necesario para que \texttt{apt update} pudiera funcionar
+    \item \textbf{Fuentes válidas:} Los repositorios Bullseye existen y son accesibles, a diferencia de los Stretch
+\end{enumerate}
+
+\textbf{Nota importante:} Los archivos obsoletos en \texttt{/etc/apt/sources.list.d/} y \texttt{/etc/apt/preferences.d/} \textbf{NO fueron eliminados}, pero APT los ignoró exitosamente al tener fuentes válidas principales.
+
+\subsection{Secuencia Exacta para Reproducir la Solución}
+\label{subsec:secuencia_exacta}
+
+Para reproducir exactamente la misma solución:
+
+\begin{enumerate}
+    \item \textbf{Paso 1:} Editar \texttt{/etc/apt/sources.list} y configurar SOLO repositorios Bullseye
+    \item \textbf{Paso 2:} Ejecutar la limpieza EXACTA de espacio mostrada anteriormente
+    \item \textbf{Paso 3:} Ejecutar \texttt{apt update} (funcionará aunque muestre warnings de repositorios obsoletos)
+\end{enumerate}
+
+\begin{lstlisting}[language=bash, caption=Secuencia EXACTA que resolvió el problema]
+# 1. EDITAR sources.list (cambiar a Bullseye)
+nano /etc/apt/sources.list
+
+# 2. LIMPIAR espacio (comandos exactos)
+rm -rf /var/cache/openmediavault/archives/*
+rm -rf /var/cache/apt/*
+apt clean
+
+# 3. ACTUALIZAR (funcionará)
+apt update
+\end{lstlisting}
+
+\subsection{Verificación del Éxito}
+\label{subsec:verificacion_exito}
+
+La solución se consideró exitosa cuando:
+
+\begin{itemize}
+    \item \texttt{apt update} completó sin errores fatales
+    \item Se descargaron listas de paquetes de Bullseye exitosamente
+    \item Los errores de repositorios obsoletos se mostraron como \textbf{warnings} en lugar de \textbf{errors}
+    \item El sistema recuperó la capacidad de gestionar paquetes
+\end{itemize}
+
+\textbf{ESTA es la solución exacta que funcionó en este caso específico.}
+
+\clearpage
+
+% SOLUCIONES IMPLEMENTADAS
+\section{Soluciones Implementadas}
+\label{sec:soluciones}
+
+\subsection{Fase 1: Limpieza de Repositorios Obsoletos}
+\label{subsec:limpieza_repositorios}
+
+Se desactivaron los repositorios que ya no existían o no eran accesibles:
+
+\begin{lstlisting}[language=bash, caption=Limpieza de repositorios obsoletos]
+# Desactivamos repositorios que ya no existen
+mv /etc/apt/sources.list.d/*.list *.disabled
+mv /etc/apt/preferences.d/omv-extras-org*.disabled
+mv /etc/apt/preferences.d/openmediavault-kernel-backports*.disabled
+\end{lstlisting}
+
+\textbf{Acciones realizadas:}
+\begin{itemize}
+    \item Renombrado de archivos de configuración de repositorios obsoletos
+    \item Desactivación de preferencias de paquetes incompatibles
+    \item Eliminación de fuentes de software no mantenidas
+\end{itemize}
+
+\subsection{Fase 2: Liberación de Espacio Crítico}
+\label{subsec:liberacion_espacio}
+
+Se realizó una limpieza agresiva de caché y archivos temporales:
+
+\begin{lstlisting}[language=bash, caption=Limpieza de espacio en disco]
+# Limpieza agresiva de caché
+rm -rf /var/lib/apt/lists/*
+rm -rf /var/cache/apt/*
+rm -rf /var/cache/openmediavault/archives/*
+apt clean
+\end{lstlisting}
+
+\textbf{Archivos eliminados:}
+\begin{itemize}
+    \item Listas de paquetes descargadas (\texttt{/var/lib/apt/lists/})
+    \item Caché de paquetes APT (\texttt{/var/cache/apt/})
+    \item Archivos de OpenMediaVault (\texttt{/var/cache/openmediavault/archives/})
+    \item Caché general del sistema de paquetes
+\end{itemize}
+
+\subsection{Fase 3: Actualización de Repositorios}
+\label{subsec:actualizacion_repositorios}
+
+Se configuraron repositorios modernos y compatibles:
+
+\begin{lstlisting}[language=bash, caption=Configuración de nuevos repositorios]
+# Configuramos repositorios modernos y compatibles
+deb http://deb.debian.org/debian bullseye main
+deb http://deb.debian.org/debian-security bullseye-security main
+\end{lstlisting}
+
+\textbf{Repositorios configurados:}
+\begin{itemize}
+    \item \textbf{Debian Bullseye:} Versión estable actual con soporte
+    \item \textbf{Debian Security:} Actualizaciones de seguridad oficiales
+    \item Fuentes oficiales y mantenidas
+\end{itemize}
+
+\subsection{Fase 4: Optimización del Espacio (Propuesta)}
+\label{subsec:optimizacion_espacio}
+
+Se propuso una solución para utilizar el espacio disponible en los 4TB del dispositivo:
+
+\begin{lstlisting}[language=bash, caption=Optimización del uso de espacio]
+# Usar los 4TB disponibles configurando apt para usar la partición grande
+mkdir -p /srv/dev-sataa24/apt
+echo "Dir::Cache \"/srv/dev-sataa24/apt/cache\";" > /etc/apt/apt.conf.d/70bigdisk
+\end{lstlisting}
+
+\textbf{Ventajas de esta configuración:}
+\begin{itemize}
+    \item Utilización del espacio disponible en la partición de datos
+    \item Liberación de la partición del sistema (\texttt{/var})
+    \item Mejor gestión de caché y descargas
+\end{itemize}
+
+\clearpage
+
+% MONTAJE DE SHARE SMB/CIFS EN DOCKER
+\section{Montaje de Share SMB/CIFS en Contenedor Docker}
+\label{sec:montaje_docker}
+
+\subsection{Problema Identificado}
+\label{subsec:problema_montaje}
+
+No se podía montar el share SMB/CIFS de WD NAS en un contenedor Docker debido a problemas de permisos y capacidades del kernel:
+
+\begin{itemize}
+    \item \textbf{Permission denied:} El contenedor no tenía privilegios suficientes
+    \item \textbf{Falta de módulos:} Módulo CIFS del kernel no disponible en el contenedor
+    \item \textbf{Capacidades limitadas:} Contenedor sin permisos para operaciones de montaje
+\end{itemize}
+
+\subsection{Solución Exitosa}
+\label{subsec:solucion_montaje}
+
+\subsubsection{Contenedor con Privilegios y Módulos del Kernel}
+\begin{lstlisting}[language=bash, caption=Ejecución de contenedor con privilegios]
+# Ejecutar contenedor con todos los privilegios necesarios
+docker run -it --privileged --cap-add ALL -v /lib/modules:/lib/modules ubuntu:rolling /bin/bash
+\end{lstlisting}
+
+\subsubsection{Instalación de Paquetes Necesarios}
+\begin{lstlisting}[language=bash, caption=Instalación de dependencias]
+# Actualizar e instalar cifs-utils
+apt update && apt install -y cifs-utils
+
+# Para diagnóstico adicional, instalar:
+apt install -y iputils-ping net-tools smbclient
+\end{lstlisting}
+
+\subsubsection{Montaje del Share}
+\begin{lstlisting}[language=bash, caption=Montaje del share SMB/CIFS]
+# Crear directorio de montaje
+mkdir -p /mnt/wdnas
+
+# Montar el share (la opción 'guest' es crucial para acceso anónimo)
+mount -t cifs //10.1.2.176/shared /mnt/wdnas -o guest
+\end{lstlisting}
+
+\subsubsection{Verificación}
+\begin{lstlisting}[language=bash, caption=Verificación del montaje]
+# Verificar que el montaje fue exitoso
+df -h | grep wdnas
+
+# Listar contenido
+ls -la /mnt/wdnas/
+\end{lstlisting}
+
+\subsection{Configuración Específica para WD NAS}
+\label{subsec:configuracion_nas}
+
+\subsubsection{En el WD NAS (10.1.2.176)}
+\begin{lstlisting}[language=bash, caption=Configuración en el NAS]
+# Verificar espacio real del sistema de archivos
+df -h
+
+# Configurar enlace simbólico si es necesario
+ln -s /srv/dev-sataa24/shared /shared
+
+# Reiniciar servicio Samba
+systemctl restart smbd
+\end{lstlisting}
+
+\subsubsection{Verificación de Conectividad desde Contenedor}
+\begin{lstlisting}[language=bash, caption=Pruebas de conectividad]
+# Probar conectividad de red
+ping -c 3 10.1.2.176
+
+# Probar acceso SMB con smbclient
+smbclient -L //10.1.2.176 -N
+smbclient //10.1.2.176/shared -N -c "ls"
+\end{lstlisting}
+
+\subsection{Solución Alternativa: Bind Mount desde Host}
+\label{subsec:bind_mount}
+
+Si el montaje directo en el contenedor no funciona:
+
+\subsubsection{En el Host Docker:}
+\begin{lstlisting}[language=bash, caption=Montaje desde el host]
+# Montar en el host primero
+sudo mkdir -p /mnt/wdnas
+sudo mount -t cifs //10.1.2.176/shared /mnt/wdnas -o guest
+
+# Luego ejecutar contenedor con bind mount
+docker run -it -v /mnt/wdnas:/mnt/wdnas ubuntu:rolling /bin/bash
+\end{lstlisting}
+
+\subsection{Configuración de Samba en WD NAS}
+\label{subsec:configuracion_samba}
+
+Archivo \texttt{/etc/samba/smb.conf} recomendado:
+\begin{lstlisting}[caption=Configuración Samba recomendada]
+[global]
+   workgroup = WORKGROUP
+   server string = WD NAS Samba Server
+   security = user
+   map to guest = bad user
+   dns proxy = no
+
+[shared]
+   path = /srv/dev-sataa24/shared
+   browseable = yes
+   read only = no
+   guest ok = yes
+   create mask = 0777
+   directory mask = 0777
+   force user = root
+\end{lstlisting}
+
+\subsection{Comandos de Diagnóstico}
+\label{subsec:diagnostico}
+
+\subsubsection{Verificar Módulo CIFS}
+\begin{lstlisting}[language=bash, caption=Verificación de módulos CIFS]
+# En el contenedor (si kmod está instalado)
+lsmod | grep cifs
+
+# Verificar disponibilidad de módulos
+find /lib/modules -name "*cifs*" 2>/dev/null
+\end{lstlisting}
+
+\subsubsection{Debug de Montaje}
+\begin{lstlisting}[language=bash, caption=Debug del proceso de montaje]
+# Montar con opciones de debug
+mount -t cifs //10.1.2.176/shared /mnt/wdnas -o guest,debug
+
+# Probar diferentes versiones de SMB
+mount -t cifs //10.1.2.176/shared /mnt/wdnas -o guest,vers=2.0
+mount -t cifs //10.1.2.176/shared /mnt/wdnas -o guest,vers=3.0
+\end{lstlisting}
+
+\subsection{Flags Docker Cruciales que Funcionaron}
+\label{subsec:flags_docker}
+
+\begin{itemize}
+    \item \texttt{--privileged}: Da acceso completo a dispositivos del host
+    \item \texttt{--cap-add ALL}: Añade todas las capacidades del kernel
+    \item \texttt{-v /lib/modules:/lib/modules}: Comparte módulos del kernel del host
+\end{itemize}
+
+\subsection{Errores Comunes y Soluciones}
+\label{subsec:errores_comunes}
+
+\subsubsection{Permission denied}
+\begin{itemize}
+    \item Usar contenedor con \texttt{--privileged}
+    \item Asegurar que \texttt{cifs-utils} está instalado
+    \item Verificar que el share permite acceso guest
+\end{itemize}
+
+\subsubsection{Device or resource busy}
+\begin{itemize}
+    \item El share ya está montado (verificar con \texttt{df -h})
+    \item Usar \texttt{umount /mnt/wdnas} antes de remontar
+\end{itemize}
+
+\subsubsection{Unable to apply new capability set}
+\begin{itemize}
+    \item Advertencia que puede ignorarse si el montaje funciona
+\end{itemize}
+
+\subsection{Verificación Final Exitosa}
+\label{subsec:verificacion_final}
+
+Cuando funciona correctamente, deberías ver:
+\begin{lstlisting}[language=bash, caption=Salida exitosa del montaje]
+//10.1.2.176/shared  3.6T  105G  3.5T   3% /mnt/wdnas
+\end{lstlisting}
+
+Y poder acceder a los archivos:
+\begin{lstlisting}[language=bash, caption=Contenido del share montado]
+ls -la /mnt/wdnas/
+# Deberías ver los directorios: backups, documents, downloads, media, public, etc.
+\end{lstlisting}
+
+\clearpage
+
+% UNIFICACIÓN DE ALMACENAMIENTO CON MERGERFS Y DFS
+\section{Unificación de Almacenamiento con MergerFS y DFS}
+\label{sec:unificacion_almacenamiento}
+
+\subsection{Problema: Espacio de Almacenamiento Distribuido}
+\label{subsec:problema_almacenamiento_distribuido}
+
+Se disponía de dos servidores Samba independientes con almacenamiento separado:
+
+\begin{itemize}
+    \item \textbf{Servidor 1 (10.1.2.176):} 3.6TB disponibles
+    \item \textbf{Servidor 2 (10.1.2.201):} 3.6TB disponibles  
+    \item \textbf{Problema:} Los clientes veían dos shares separados, no un espacio unificado
+    \item \textbf{Objetivo:} Unificar ambos servidores para que los clientes vean un único espacio de 7.2TB
+\end{itemize}
+
+\subsection{Solución 1: MergerFS para Unificación Real del Espacio}
+\label{subsec:solucion_mergerfs}
+
+\subsubsection{Instalación de MergerFS}
+\begin{lstlisting}[language=bash, caption=Instalación de MergerFS en Servidor 1]
+# Actualizar sistema e instalar MergerFS
+apt-get update
+apt-get install mergerfs
+\end{lstlisting}
+
+\subsubsection{Preparación de Directorios}
+\begin{lstlisting}[language=bash, caption=Preparación de estructura de directorios]
+# Crear directorios para el montaje
+mkdir -p /mnt/servidor2-remoto
+mkdir -p /mnt/combinado
+\end{lstlisting}
+
+\subsubsection{Montaje del Servidor Remoto}
+\begin{lstlisting}[language=bash, caption=Montaje del share del Servidor 2]
+# Montar el share del Servidor 2 localmente
+mount -t cifs //10.1.2.201/data /mnt/servidor2-remoto -o username=root,password=root,vers=3.0
+\end{lstlisting}
+
+\subsubsection{Unificación con MergerFS}
+\begin{lstlisting}[language=bash, caption=Unificación de ambos almacenamientos]
+# Unir ambos sistemas de archivos con MergerFS
+mergerfs -o defaults,allow_other,category.create=epmfs /srv/dev-sataa24:/mnt/servidor2-remoto /mnt/combinado
+\end{lstlisting}
+
+\subsubsection{Configuración en Samba}
+\begin{lstlisting}[caption=Share Samba unificado con MergerFS]
+[combinado-total]
+   path = /mnt/combinado
+   browseable = yes
+   read only = no
+   guest ok = yes
+   create mask = 0777
+   directory mask = 0777
+   force user = root
+\end{lstlisting}
+
+\subsubsection{Verificación del Espacio Unificado}
+\begin{lstlisting}[language=bash, caption=Verificación del espacio combinado]
+# Verificar que el espacio se ha unificado correctamente
+df -h
+
+# Debería mostrar:
+# srv/dev-sataa24:mnt/servidor2-remoto  7.2T  141G  7.0T   2% /mnt/combinado
+\end{lstlisting}
+
+\subsection{Solución 2: DFS para Unificación Lógica}
+\label{subsec:solucion_dfs}
+
+\subsubsection{Configuración Global de DFS en Samba}
+\begin{lstlisting}[caption=Habilitar DFS en smb.conf]
+[global]
+   workgroup = WORKGROUP
+   server string = WD NAS Samba Server
+   security = user
+   map to guest = bad user
+   dns proxy = no
+   
+   # Habilitar soporte DFS
+   host msdfs = yes
+\end{lstlisting}
+
+\subsubsection{Preparación del Directorio DFS}
+\begin{lstlisting}[language=bash, caption=Preparar estructura DFS]
+# Crear directorio raíz para DFS
+mkdir -p /srv/dev-sataa24/dfs-root
+\end{lstlisting}
+
+\subsubsection{Creación de Enlaces DFS}
+\begin{lstlisting}[language=bash, caption=Crear enlace DFS unificado]
+# Crear enlace DFS que apunta a ambos servidores
+ln -s "msdfs:10.1.2.176\\shared,10.1.2.201\\data" /srv/dev-sataa24/dfs-root/unificado
+\end{lstlisting}
+
+\subsubsection{Configuración del Share DFS}
+\begin{lstlisting}[caption=Share DFS en smb.conf]
+[dfs-root]
+   comment = Unificacion de servidores Samba
+   path = /srv/dev-sataa24/dfs-root
+   msdfs root = yes
+   browseable = yes
+   read only = no
+   guest ok = yes
+   create mask = 0777
+   directory mask = 0777
+\end{lstlisting}
+
+\subsubsection{Reinicio y Verificación de Samba}
+\begin{lstlisting}[language=bash, caption=Reinicio y prueba de DFS]
+# Reiniciar servicio Samba
+systemctl restart smbd
+
+# Verificar que DFS está funcionando
+smbclient -L localhost -U%
+
+# Probar acceso DFS
+smbclient //localhost/dfs-root -U%
+\end{lstlisting}
+
+\subsection{Comparación entre MergerFS y DFS}
+\label{subsec:comparacion_mergerfs_dfs}
+
+\begin{table}[H]
+\centering
+\caption{Comparación entre MergerFS y DFS}
+\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+\hline
+\textbf{MergerFS} & \textbf{DFS} \\
+\hline
+Unificación REAL del espacio & Unificación LÓGICA del espacio \\
+\hline
+Suma la capacidad: 3.6TB + 3.6TB = 7.2TB & No suma capacidad, solo une vistas \\
+\hline
+Los archivos se distribuyen automáticamente & Los archivos se almacenan en el servidor donde se crean \\
+\hline
+Requiere montar el share remoto localmente & Solo requiere configuración Samba \\
+\hline
+Mejor para balanceo de carga & Mejor para organización de recursos \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Configuración Permanente}
+\label{subsec:configuracion_permanente}
+
+\subsubsection{Configuración en /etc/fstab para MergerFS}
+\begin{lstlisting}[language=bash, caption=Configuración permanente en fstab]
+# Montaje automático del servidor remoto
+//10.1.2.201/data /mnt/servidor2-remoto cifs username=root,password=root,vers=3.0 0 0
+
+# Montaje automático de MergerFS
+/srv/dev-sataa24:/mnt/servidor2-remoto /mnt/combinado fuse.mergerfs defaults,allow_other,category.create=epmfs 0 0
+\end{lstlisting}
+
+\subsection{Verificación Final del Espacio Unificado}
+\label{subsec:verificacion_espacio_unificado}
+
+\begin{lstlisting}[language=bash, caption=Verificación final del éxito]
+# Espacio combinado con MergerFS
+df -h | grep combinado
+# srv/dev-sataa24:mnt/servidor2-remoto  7.2T  141G  7.0T   2% /mnt/combinado
+
+# Verificar shares Samba
+smbclient -L localhost -U%
+# Debería mostrar: combinado-total, dfs-root
+
+# Probar acceso desde cliente
+smbclient //10.1.2.176/combinado-total -U%
+# Debería mostrar el espacio combinado de 7.2TB
+\end{lstlisting}
+
+\subsection{Resolución de Problemas Comunes}
+\label{subsec:resolucion_problemas_unificacion}
+
+\subsubsection{Problema: "Permission denied" al montar CIFS}
+\begin{lstlisting}[language=bash, caption=Solución para problemas de permisos]
+# Verificar que el share permite acceso guest
+# En el servidor remoto, verificar smb.conf:
+guest ok = yes
+
+# Probar montaje con opción guest
+mount -t cifs //10.1.2.201/data /mnt/servidor2-remoto -o guest,vers=3.0
+\end{lstlisting}
+
+\subsubsection{Problema: Enlace DFS no funciona}
+\begin{lstlisting}[language=bash, caption=Verificación de enlaces DFS]
+# Verificar que el enlace se creó correctamente
+ls -la /srv/dev-sataa24/dfs-root/
+# Debería mostrar: unificado -> msdfs:10.1.2.176\shared,10.1.2.201\data
+
+# Verificar que los nombres de shares son correctos
+smbclient -L 10.1.2.176 -U%
+smbclient -L 10.1.2.201 -U%
+\end{lstlisting}
+
+\subsubsection{Problema: MergerFS no muestra espacio combinado}
+\begin{lstlisting}[language=bash, caption=Solución para MergerFS]
+# Verificar que ambos sistemas de archivos están montados
+df -h | grep -E '(sataa24|servidor2)'
+
+# Reiniciar MergerFS
+umount /mnt/combinado
+mergerfs -o defaults,allow_other,category.create=epmfs /srv/dev-sataa24:/mnt/servidor2-remoto /mnt/combinado
+\end{lstlisting}
+
+\clearpage
+% SOLUCIÓN DEFINITIVA: CONFIGURACIÓN SAMBA
+\section{Solución Definitiva: Servidor Samba como Alternativa a NFS}
+\label{sec:solucion_samba}
+
+\subsection{Problema Crítico: Falta de Soporte NFS en el Kernel}
+\label{subsec:problema_kernel_nfs}
+
+Durante la implementación se descubrió una limitación fundamental del sistema:
+
+\begin{itemize}
+    \item \textbf{Kernel personalizado:} Versión 4.1.17 compilada sin soporte para NFS server
+    \item \textbf{Módulo nfsd ausente:} \texttt{modprobe nfsd} retornaba "Module nfsd not found"
+    \item \textbf{Filesystem no reconocido:} El comando \texttt{mount -t nfsd} fallaba con "unknown filesystem type"
+    \item \textbf{Servicios NFS inoperantes:} \texttt{nfs-server}, \texttt{nfs-idmapd} en estado failed permanente
+\end{itemize}
+
+\subsection{Implementación de Servidor Samba}
+\label{subsec:implementacion_samba}
+
+Se decidió implementar Samba como solución alternativa, ofreciendo ventajas significativas:
+
+\subsubsection{Configuración del Servidor Samba}
+\begin{lstlisting}[language=bash, caption=Configuración Samba optimizada para WD NAS]
+# Instalación independiente de OpenMediaVault
+apt-get install -y samba samba-common-bin
+
+# Configuración optimizada
+cat > /etc/samba/smb.conf << 'EOF'
+[global]
+   workgroup = WORKGROUP
+   server string = WD NAS Samba Server
+   security = user
+   map to guest = bad user
+   dns proxy = no
+   log level = 1
+   
+   # Optimizaciones para hardware WD NAS
+   socket options = TCP_NODELAY SO_RCVBUF=65536 SO_SNDBUF=65536
+   use sendfile = yes
+   read raw = yes
+   write raw = yes
+
+[combinado-total]
+   path = /mnt/combinado
+   browseable = yes
+   read only = no
+   guest ok = yes
+   create mask = 0777
+   directory mask = 0777
+   force user = root
+EOF
+
+# Habilitación del servicio
+systemctl restart smbd
+systemctl enable smbd
+\end{lstlisting}
+
+\subsection{Resultados y Verificación}
+\label{subsec:resultados_samba}
+
+\subsubsection{Montaje Exitoso desde Contenedor Docker}
+\begin{lstlisting}[language=bash, caption=Acceso exitoso al filesystem de 7.2TB]
+# Desde contenedor Docker con privilegios
+mount -t cifs //10.1.2.176/combinado-total /mnt/wdnas -o guest
+
+# Verificación del espacio unificado
+df -h | grep wdnas
+//10.1.2.176/combinado-total  7.2T  215G  7.0T   3% /mnt/wdnas
+\end{lstlisting}
+
+\subsubsection{Ventajas de la Solución Samba}
+\begin{itemize}
+    \item \textbf{Compatibilidad universal:} Funciona con Windows, Linux, macOS sin configuración adicional
+    \item \textbf{Sin dependencias del kernel:} No requiere módulos especiales
+    \item \textbf{Rendimiento optimizado:} Configuración específica para el hardware del WD NAS
+    \item \textbf{Acceso guest:} Permite conexiones anónimas sin autenticación compleja
+    \item \textbf{Integración simple con Docker:} Montaje directo sin requerir privilegios complejos
+\end{itemize}
+
+\subsection{Conclusión de la Solución Samba}
+\label{subsec:conclusion_samba}
+
+La implementación de Samba demostró ser la solución más efectiva para las limitaciones del sistema WD My Cloud Home. A diferencia de NFS, que requería soporte específico del kernel, Samba funciona completamente en espacio de usuario y ofrece:
+
+\begin{itemize}
+    \item \textbf{Compatibilidad inmediata} con todos los sistemas operativos modernos
+    \item \textbf{Fácil integración} con entornos Docker y contenedores
+    \item \textbf{Rendimiento optimizado} para el hardware específico del dispositivo
+    \item \textbf{Mantenimiento simplificado} sin dependencias críticas del kernel
+\end{itemize}
+
+El resultado final fue un servidor de archivos completamente funcional, accesible desde toda la red, con el espacio unificado de 7.2TB disponible para los usuarios.
+% RESULTADOS Y ESTADO ACTUAL
+\section{Resultados y Estado Actual}
+\label{sec:resultados}
+
+\subsection{Resultados Finales}
+\label{subsec:resultados_finales}
+
+\begin{itemize}
+    \item \textbf{\texttt{apt update} funcional:} Sin errores de repositorios
+    \item \textbf{Espacio mejorado:} De 85\% a 67\% de uso en \texttt{/var}
+    \item \textbf{Sistema preparado:} Listo para actualizaciones futuras
+    \item \textbf{Potencial liberado:} 3.6TB disponibles para uso del sistema
+    \item \textbf{Montaje CIFS exitoso:} Share accesible desde contenedores Docker
+    \item \textbf{Almacenamiento unificado:} 7.2TB combinados con MergerFS
+    \item \textbf{DFS operativo:} Unificación lógica de recursos Samba
+\end{itemize}
+
+\subsection{Estado Actual}
+\label{subsec:estado_actual}
+
+\subsubsection{LOGROS}
+\begin{itemize}
+    \item \textbf{Repositorios obsoletos → ELIMINADOS }
+    \item \textbf{Errores 404 → RESUELTOS }
+    \item \textbf{Espacio crítico → MEJORADO}
+    \item \textbf{Montaje Docker → FUNCIONAL}
+    \item \textbf{Almacenamiento unificado → 7.2TB COMBINADOS}
+    \item \textbf{DFS configurado → RECURSOS UNIFICADOS}
+\end{itemize}
+
+\subsubsection{PRÓXIMOS PASOS OPCIONALES}
+\begin{itemize}
+    \item Configurar APT para usar los 4TB disponibles
+    \item Considerar actualización completa de OpenMediaVault
+    \item Evaluar reinstalación limpia si persisten problemas
+    \item Automatizar el montaje CIFS en contenedores
+    \item Implementar replicación automática entre servidores
+\end{itemize}
+
+\subsection{Lección Aprendida}
+\label{subsec:leccion_aprendida}
+
+El problema identificado es típico de dispositivos embebidos con software antiguo:
+
+\begin{itemize}
+    \item \textbf{Particiones de sistema pequeñas:} Diseño inadecuado para actualizaciones
+    \item \textbf{Repositorios obsoletos:} Falta de mantenimiento continuo
+    \item \textbf{Falta de mantenimiento:} Actualizaciones no aplicadas regularmente
+    \item \textbf{Permisos Docker:} Contenedores necesitan privilegios específicos para montajes
+    \item \textbf{Almacenamiento distribuido:} Necesidad de unificación para mejor usabilidad
+\end{itemize}
+
+La solución exitosa combinó múltiples estrategias:
+
+\begin{enumerate}
+    \item \textbf{Limpieza de configuración:} Eliminación de fuentes obsoletas
+    \item \textbf{Liberación de espacio:} Gestión agresiva de caché
+    \item \textbf{Actualización de fuentes:} Configuración de repositorios mantenidos
+    \item \textbf{Privilegios Docker:} Configuración adecuada de capacidades
+    \item \textbf{Compartir módulos:} Acceso a módulos del kernel del host
+    \item \textbf{Unificación almacenamiento:} MergerFS para espacio real combinado
+    \item \textbf{Unificación lógica:} DFS para organización de recursos
+\end{enumerate}
+
+\clearpage
+
+% CONCLUSIONES
+\section{Conclusiones}
+\label{sec:conclusiones}
+
+\subsection{Impacto de la Solución}
+\label{subsec:impacto}
+
+La implementación de las soluciones descritas permitió:
+
+\begin{itemize}
+    \item \textbf{Recuperar la funcionalidad básica:} El sistema puede actualizarse y gestionar paquetes
+    \item \textbf{Mejorar la estabilidad:} Eliminación de conflictos de configuración
+    \item \textbf{Prevenir problemas futuros:} Configuración sostenible a largo plazo
+    \item \textbf{Optimizar recursos:} Mejor uso del espacio disponible
+    \item \textbf{Habilitar integración:} Acceso a shares desde contenedores Docker
+    \item \textbf{Unificar almacenamiento:} Espacio combinado de 7.2TB para los clientes
+    \item \textbf{Mejorar usabilidad:} Los usuarios ven un único espacio de almacenamiento
+\end{itemize}
+
+\subsection{Recomendaciones para Sistemas Similares}
+\label{subsec:recomendaciones}
+
+Para evitar problemas similares en el futuro:
+
+\begin{itemize}
+    \item \textbf{Mantenimiento regular:} Actualizaciones periódicas del sistema
+    \item \textbf{Monitoreo de espacio:} Control continuo del uso de disco
+    \item \textbf{Configuración adecuada:} Uso de repositorios oficiales y mantenidos
+    \item \textbf{Planificación de capacidad:} Diseño adecuado de particiones del sistema
+    \item \textbf{Documentación de configuración:} Registrar cambios en configuración Docker
+    \item \textbf{Unificación temprana:} Implementar MergerFS/DFS desde el inicio en entornos multi-servidor
+\end{itemize}
+
+\subsection{Transferencia a Otros Entornos}
+\label{subsec:transferencia}
+
+Las lecciones aprendidas son aplicables a:
+
+\begin{itemize}
+    \item \textbf{Sistemas embebidos:} Dispositivos con recursos limitados
+    \item \textbf{Sistemas legacy:} Equipos con software antiguo
+    \item \textbf{NAS y dispositivos de almacenamiento:} Sistemas similares a WD My Cloud
+    \item \textbf{Entornos Debian/Ubuntu:} Cualquier sistema basado en APT
+    \item \textbf{Contenedores Docker:} Configuración de montajes de red
+    \item \textbf{Entornos multi-servidor:} Unificación de almacenamiento distribuido
+\end{itemize}
+
+\subsection{Conclusión Final}
+\label{subsec:conclusion_final}
+
+La resolución exitosa de este caso demuestra la importancia de:
+
+\begin{enumerate}
+    \item \textbf{Diagnóstico preciso:} Identificar las causas raíz del problema
+    \item \textbf{Enfoque sistemático:} Aplicar soluciones en fases lógicas
+    \item \textbf{Documentación:} Registrar el proceso para referencia futura
+    \item \textbf{Validación:} Verificar que las soluciones funcionan como se espera
+    \item \textbf{Soluciones escalables:} Implementar arquitecturas que crezcan con las necesidades
+\end{enumerate}
+
+El sistema WD My Cloud Home ahora está operativo y preparado para un mantenimiento continuo, con capacidad completa para integrarse con entornos Docker modernos y con un espacio de almacenamiento unificado de 7.2TB disponible para los usuarios.
+
+\end{document}

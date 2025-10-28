@@ -1,0 +1,87 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Contexto del problema}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Objetivos}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Problemas Identificados}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Repositorios de Software Obsoletos}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Espacio en Disco Insuficiente}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Configuración Mixta Incompatible}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Análisis Exacto de la Solución Real Implementada}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Comandos Exactos que Resolvieron el Problema}{6}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Cambio Crítico en sources.list}{6}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Limpieza de Espacio que Habilitó la Solución}{6}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}Evidencia de los Logs}{6}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Estado ANTES de la solución:}{6}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Estado DESPUÉS de la solución:}{7}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}¿Por qué Funcionó con Solo Estos Cambios?}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Secuencia Exacta para Reproducir la Solución}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Verificación del Éxito}{8}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Soluciones Implementadas}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Fase 1: Limpieza de Repositorios Obsoletos}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Fase 2: Liberación de Espacio Crítico}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Fase 3: Actualización de Repositorios}{9}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Fase 4: Optimización del Espacio (Propuesta)}{10}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Montaje de Share SMB/CIFS en Contenedor Docker}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Problema Identificado}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Solución Exitosa}{11}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Contenedor con Privilegios y Módulos del Kernel}{11}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Instalación de Paquetes Necesarios}{11}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Montaje del Share}{11}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Verificación}{12}{subsubsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.3}Configuración Específica para WD NAS}{12}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}En el WD NAS (10.1.2.176)}{12}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Verificación de Conectividad desde Contenedor}{12}{subsubsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.4}Solución Alternativa: Bind Mount desde Host}{12}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}En el Host Docker:}{12}{subsubsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.5}Configuración de Samba en WD NAS}{13}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Comandos de Diagnóstico}{13}{subsection.5.6}%
+\contentsline {subsubsection}{\numberline {5.6.1}Verificar Módulo CIFS}{13}{subsubsection.5.6.1}%
+\contentsline {subsubsection}{\numberline {5.6.2}Debug de Montaje}{14}{subsubsection.5.6.2}%
+\contentsline {subsection}{\numberline {5.7}Flags Docker Cruciales que Funcionaron}{14}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.8}Errores Comunes y Soluciones}{14}{subsection.5.8}%
+\contentsline {subsubsection}{\numberline {5.8.1}Permission denied}{14}{subsubsection.5.8.1}%
+\contentsline {subsubsection}{\numberline {5.8.2}Device or resource busy}{14}{subsubsection.5.8.2}%
+\contentsline {subsubsection}{\numberline {5.8.3}Unable to apply new capability set}{14}{subsubsection.5.8.3}%
+\contentsline {subsection}{\numberline {5.9}Verificación Final Exitosa}{14}{subsection.5.9}%
+\contentsline {section}{\numberline {6}Unificación de Almacenamiento con MergerFS y DFS}{16}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Problema: Espacio de Almacenamiento Distribuido}{16}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Solución 1: MergerFS para Unificación Real del Espacio}{16}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Instalación de MergerFS}{16}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Preparación de Directorios}{16}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Montaje del Servidor Remoto}{16}{subsubsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}Unificación con MergerFS}{17}{subsubsection.6.2.4}%
+\contentsline {subsubsection}{\numberline {6.2.5}Configuración en Samba}{17}{subsubsection.6.2.5}%
+\contentsline {subsubsection}{\numberline {6.2.6}Verificación del Espacio Unificado}{17}{subsubsection.6.2.6}%
+\contentsline {subsection}{\numberline {6.3}Solución 2: DFS para Unificación Lógica}{17}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Configuración Global de DFS en Samba}{17}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Preparación del Directorio DFS}{18}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}Creación de Enlaces DFS}{18}{subsubsection.6.3.3}%
+\contentsline {subsubsection}{\numberline {6.3.4}Configuración del Share DFS}{18}{subsubsection.6.3.4}%
+\contentsline {subsubsection}{\numberline {6.3.5}Reinicio y Verificación de Samba}{18}{subsubsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.4}Comparación entre MergerFS y DFS}{19}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Configuración Permanente}{19}{subsection.6.5}%
+\contentsline {subsubsection}{\numberline {6.5.1}Configuración en /etc/fstab para MergerFS}{19}{subsubsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.6}Verificación Final del Espacio Unificado}{19}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Resolución de Problemas Comunes}{20}{subsection.6.7}%
+\contentsline {subsubsection}{\numberline {6.7.1}Problema: "Permission denied" al montar CIFS}{20}{subsubsection.6.7.1}%
+\contentsline {subsubsection}{\numberline {6.7.2}Problema: Enlace DFS no funciona}{20}{subsubsection.6.7.2}%
+\contentsline {subsubsection}{\numberline {6.7.3}Problema: MergerFS no muestra espacio combinado}{20}{subsubsection.6.7.3}%
+\contentsline {section}{\numberline {7}Solución Definitiva: Servidor Samba como Alternativa a NFS}{22}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Problema Crítico: Falta de Soporte NFS en el Kernel}{22}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Implementación de Servidor Samba}{22}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Configuración del Servidor Samba}{22}{subsubsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.3}Resultados y Verificación}{23}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Montaje Exitoso desde Contenedor Docker}{23}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Ventajas de la Solución Samba}{23}{subsubsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.4}Conclusión de la Solución Samba}{24}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Resultados y Estado Actual}{24}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Resultados Finales}{24}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Estado Actual}{24}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}LOGROS}{24}{subsubsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2}PRÓXIMOS PASOS OPCIONALES}{25}{subsubsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.3}Lección Aprendida}{25}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Conclusiones}{26}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Impacto de la Solución}{26}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Recomendaciones para Sistemas Similares}{26}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Transferencia a Otros Entornos}{26}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Conclusión Final}{27}{subsection.9.4}%

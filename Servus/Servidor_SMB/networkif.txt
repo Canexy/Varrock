@@ -1,0 +1,19 @@
+  GNU nano 2.7.4                                                           File: interfaces                                                                     
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# eth0 network interface
+auto eth0
+allow-hotplug eth0
+iface eth0 inet static
+    address 10.1.2.176
+    gateway 10.1.2.254
+    netmask 255.255.255.0
+    dns-nameservers 8.8.8.8
+iface eth0 inet6 manual
+    pre-down ip -6 addr flush dev $IFACE
+# Include additional interface stanzas.
+source-directory interfaces.d
+
