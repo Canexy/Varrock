@@ -1,0 +1,88 @@
+version: "3.8"
+
+services:
+  ICO1:
+    image: alvarete37/kathara-router
+    container_name: router1
+    privileged: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net_a
+      - net_b
+
+  ICO2:
+    image: alvarete37/kathara-router
+    container_name: router2
+    privileged: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net_b
+      - net_c
+
+  ICO3:
+    image: alvarete37/kathara-router
+    container_name: router3
+    privileged: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net_c
+      - net_d
+
+  ICO4:
+    image: alvarete37/kathara-router
+    container_name: router4
+    privileged: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net_d
+      - net_e
+
+  ICO5:
+    image: alvarete37/kathara-router
+    container_name: router5
+    privileged: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net_e
+      - net_f
+
+  ICO6:
+    image: alvarete37/kathara-router
+    container_name: router6
+    privileged: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net_f
+      - net_g
+
+  ICO7:
+    image: alvarete37/kathara-router
+    container_name: router7
+    privileged: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net_g
+      - net_a
+
+networks:
+  net_a:
+  net_b:
+  net_c:
+  net_d:
+  net_e:
+  net_f:
+  net_g:
