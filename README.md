@@ -1,1 +1,1 @@
-"# Varrock"
+# Varrock
