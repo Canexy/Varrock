@@ -1,3 +1,20 @@
 
 # KDE Álvaro.
 .directory
+
+# Archivos temporales de LaTeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+
+
+# Otros temporales
+*.out
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb

@@ -12,6 +12,9 @@ Crear una infraestructura de red educativa con servicios esenciales para demostr
 
 ### 🗄️ Servicios a Implementar
 
+### Servicios de red e internet
+- Propio servidor de dns
+
 #### Base de Datos
 - Servidor SQL de prueba
 - Servidor NoSQL de prueba 
