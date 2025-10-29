@@ -1,0 +1,27 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción y Contexto del Proyecto}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Objetivo Inicial}{2}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Problemas Iniciales y Primera Solución}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Incompatibilidad con Linux}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Intentos Fallidos de Solución}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Solución Encontrada: Flasheo con Debian y OpenMediaVault}{2}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Procedimiento de Instalación}{3}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Configuración de Red y Acceso Inicial}{3}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Configuración de IPs Estáticas}{3}{subsubsection.2.3.3}%
+\contentsline {section}{\numberline {3}Nuevos Problemas Identificados}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Debian Desactualizado y Sin Soporte}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Imposibilidad de Usar NFS}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Problemas con Repositorios de Software}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Situación Actual de los Dispositivos}{5}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Optimización de Espacio y Configuración de Samba}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Optimización del Espacio en Disco}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Configuración de Samba}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Verificación del Funcionamiento}{6}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Unificación del Almacenamiento con MergerFS}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Escenario Inicial}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Implementación de MergerFS}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Configuración Samba para el Share Unificado}{7}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Configuración Permanente}{8}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Verificación Final}{8}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Conclusiones y Estado Actual}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Estado del Sistema}{8}{subsection.6.1}%

@@ -1,0 +1,316 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish,shorthands=off]{babel}
+
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Configuración mejorada para listings
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    frame=lines,
+    framesep=3pt,
+    rulesep=3pt,
+    backgroundcolor=\color{gray!5},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    tabsize=2,
+    captionpos=b,
+    belowcaptionskip=1\baselineskip
+}
+
+% Para cambiar "Listing" por "Comando"
+\renewcommand{\lstlistingname}{Comando}
+
+% Para URLs largas que necesitan romperse
+\usepackage{url}
+\usepackage{breakurl}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={NAS Report},
+    breaklinks=true
+}
+
+\usepackage[style=ieee]{biblatex}
+\addbibresource{referencias.bib}
+
+\title{\textbf{Informe Técnico: Implementación de NAS en Clúster Proxmox}}
+\author{Mario \& Álvaro}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Administración de Sistemas Gestores de Bases de Datos}
+\fancyhead[R]{Mario \& Álvaro}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\LARGE \textbf{Informe Técnico}\par}
+    \vspace{0.4cm}
+    {\Large \textbf{Implementación de NAS en Clúster Proxmox}\par}
+    \vspace{1.5cm}
+    {\large Administración de Sistemas Gestores de Bases de Datos\par}
+    \vspace{0.5cm}
+    {\large \textbf{Mario Valiño Canalejas \& Álvaro Vázquez Vázquez}\par}
+    \vspace{0.2cm}
+    {\large \today\par}
+    \vfill
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{Introducción y Contexto del Proyecto}
+
+\subsection{Objetivo Inicial}
+Se recibieron dos unidades NAS WD My Cloud Home de 4TB cada una para su integración con los servidores disponibles en el aula. Decidimos incorporar estos dispositivos al clúster Proxmox previamente configurado. \\
+
+El plan inicial consistía en utilizar el protocolo NFS para integrar el almacenamiento de los NAS con Proxmox, con el objetivo de disponer de almacenamiento adicional para máquinas virtuales, archivos ISO y cualquier otro uso que requiriera almacenamiento compartido.
+
+\section{Problemas Iniciales y Primera Solución}
+
+\subsection{Incompatibilidad con Linux}
+Tras comenzar a trabajar con los dispositivos, identificamos que los NAS WD My Cloud Home no estaban preparados para funcionar nativamente con sistemas Linux. El software oficial proporcionado por Western Digital solo estaba disponible para Windows, lo que representaba una limitación significativa para nuestro entorno basado en Proxmox (Debian Linux).
+
+\subsection{Intentos Fallidos de Solución}
+Exploramos varias alternativas para superar esta limitación. Por un lado, intentamos utilizar máquinas virtuales Windows con el software oficial de WD, pero incluso esta aproximación presentó problemas persistentes. Por otro lado, contactamos con estudiantes del curso anterior que habían trabajado con el mismo hardware. Pablo Astorga, un excompañero, nos indicó que había logrado solucionar el problema mediante un proceso de \textit{flasheo} del dispositivo.
+
+\subsection{Solución Encontrada: Flasheo con Debian y OpenMediaVault}
+
+Según la información proporcionada por Pablo Astorga, localizamos un tutorial y recursos en línea que permitían reinstalar completamente el sistema operativo de los NAS:
+
+\begin{itemize}
+    \item \textbf{Tutorial de referencia:} \\
+    \href{https://fullstacklog.com/como-formatear-e-instalar-debian-omv-en-un-nas-wd-my-cloud-home/}{fullstacklog.com/como-formatear-e-instalar-debian-omv}
+    \item \textbf{Foro ruso con información técnica:} \\
+    \href{https://4pda.to/forum/index.php?showtopic=467828&st=12140#entry87961189}{4pda.to/forum/wd-my-cloud-home}
+    \item \textbf{Descarga de la imagen:} \\
+    \href{https://fox-exe.ru/WDMyCloud/WDMyCloud-Home/Debian/}{fox-exe.ru/WDMyCloud/Debian}
+\end{itemize}
+
+La imagen disponible consistía en Debian 9 (Stretch) con OpenMediaVault preinstalado.
+
+\subsubsection{Procedimiento de Instalación}
+El proceso de instalación requirió varios pasos secuenciales: preparar un USB formateado en FAT32 con tabla de particiones MBR, copiar el contenido del archivo ZIP descargado en la raíz del USB, desconectar el NAS de la corriente eléctrica, insertar el USB en el NAS, localizar el botón de reset del NAS y mantenerlo presionado con un alfiler mientras se conectaba el NAS a la corriente, y finalmente esperar a que el LED del NAS dejara de parpadear y se estabilizara, indicando que la instalación había finalizado.
+
+\subsubsection{Configuración de Red y Acceso Inicial}
+Dado que Debian 9 venía con DHCP configurado por defecto, el siguiente desafío consistió en localizar las direcciones IP asignadas a los dispositivos en la red. Para ello utilizamos:
+
+\begin{lstlisting}[language=bash, caption=Comando para localizar dispositivos en red.]
+tcpdump -i vmbr0 -n -s0 -vv -e 'udp port 67 or udp port 68'
+\end{lstlisting}
+
+Tras varios intentos, logramos identificar las direcciones IP temporales de ambos NAS y acceder a la interfaz de OpenMediaVault utilizando las credenciales por defecto \texttt{admin/admin}.
+
+\subsubsection{Configuración de IPs Estáticas}
+Una vez identificadas las IPs temporales (10.1.2.201 y 10.1.2.176), accedimos a cada NAS y modificamos el archivo \texttt{/etc/network/interfaces} con la siguiente configuración: \\
+
+\begin{lstlisting}[language=bash, caption=Configuración de red estática para NAS 1.]
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet static
+    address 10.1.2.176
+    gateway 10.1.2.254
+    netmask 255.255.255.0
+    dns-nameservers 8.8.8.8
+iface eth0 inet6 manual
+    pre-down ip -6 addr flush dev $IFACE
+source-directory interfaces.d
+\end{lstlisting}
+
+Para el segundo NAS se utilizó la IP \texttt{10.1.2.201}. Esto nos permitió tener control permanente sobre los dispositivos dentro de la red.
+
+\section{Nuevos Problemas Identificados}
+
+\subsection{Debian Desactualizado y Sin Soporte}
+Una vez accedido a los sistemas, constatamos que la imagen instalada contenía una versión muy desactualizada de Debian (Stretch), que ya no recibía soporte oficial y presentaba importantes vulnerabilidades de seguridad.
+
+\subsection{Imposibilidad de Usar NFS}
+El objetivo principal de integrar NFS con Proxmox resultó imposible de implementar debido a la arquitectura ARM de los NAS WD My Cloud Home, que limita la compatibilidad con algunos servicios, y al fallo del servicio \texttt{nfs-server.service}, que no podía ejecutarse correctamente, como verificamos mediante: \\
+
+\begin{lstlisting}[language=bash, caption=Verificación del servicio NFS.]
+journalctl -xe
+\end{lstlisting}
+
+\subsection{Problemas con Repositorios de Software}
+Los repositorios de software originales de Debian 9 ya no estaban operativos, lo que impedía actualizar el sistema o instalar nuevos paquetes. Exploramos dos estrategias para resolver este problema:
+
+\begin{itemize}
+    \item \textbf{Opción 1: Actualización a Debian 11 (Bullseye).}
+    \begin{lstlisting}
+deb http://deb.debian.org/debian bullseye main
+deb http://deb.debian.org/debian-security bullseye-security main
+    \end{lstlisting}
+    
+    \item \textbf{Opción 2: Repositorios legacy de Debian 9 (Stretch).}
+    \begin{lstlisting}
+deb [trusted=yes] http://archive.debian.org/debian stretch main contrib non-free
+deb [trusted=yes] http://archive.debian.org/debian-security stretch/updates main contrib non-free
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{Situación Actual de los Dispositivos}
+Como resultado de las diferentes estrategias aplicadas, actualmente contamos con dos NAS operativos: el primero ejecuta Debian 11 (Bullseye) en la IP 10.1.2.176, mientras que el segundo mantiene Debian 9 (Stretch) en la IP 10.1.2.201. En ambos casos logramos que \texttt{apt update} funcionara correctamente tras modificar el archivo \texttt{/etc/apt/sources.list}, limpiar espacio en el NAS y ejecutar \texttt{apt clean} antes del update.
+
+\section{Optimización de Espacio y Configuración de Samba}
+
+\subsection{Optimización del Espacio en Disco}
+Para poder utilizar los 4TB completos de cada NAS, que no estaban disponibles inicialmente con la imagen Debian/OMV, implementamos la siguiente optimización: \\
+
+\begin{lstlisting}[language=bash, caption=Optimización del espacio APT.]
+mkdir -p /srv/dev-sataa24/apt
+echo "Dir::Cache \"/srv/dev-sataa24/apt/cache\";" > /etc/apt/apt.conf.d/70bigdisk
+\end{lstlisting}
+
+Estos comandos crean un directorio para almacenar la caché de APT en la partición grande del NAS y configuran APT para usar esa ubicación, liberando espacio en la partición del sistema.
+
+\subsection{Configuración de Samba}
+Dado que NFS no era viable, decidimos implementar Samba para compartir el almacenamiento. La configuración en el NAS 1 fue: \\
+
+\begin{lstlisting}[language=bash, caption=Configuración Samba en NAS 1.]
+apt-get install -y samba samba-common-bin
+
+cat > /etc/samba/smb.conf << 'EOF'
+[global]
+   workgroup = WORKGROUP
+   server string = WD NAS Samba Server
+   security = user
+   map to guest = bad user
+   dns proxy = no
+   log level = 1
+   
+   socket options = TCP_NODELAY SO_RCVBUF=65536 SO_SNDBUF=65536
+   use sendfile = yes
+   read raw = yes
+   write raw = yes
+
+[shared]
+   path = /srv/dev-sataa24/shared
+   browseable = yes
+   read only = no
+   guest ok = yes
+   create mask = 0777
+   directory mask = 0777
+   force user = root
+EOF
+
+systemctl restart smbd
+systemctl enable smbd
+\end{lstlisting}
+
+En el segundo NAS, la única diferencia fue que el share se llamó \texttt{data} en lugar de \texttt{shared}.
+
+\subsection{Verificación del Funcionamiento}
+Para comprobar que Samba funcionaba correctamente: \\
+
+\begin{lstlisting}[language=bash, caption=Verificación de acceso Samba.]
+smbclient -L //10.1.2.176 -N
+\end{lstlisting}
+
+También verificamos el montaje directo desde un cliente Linux: \\
+
+\begin{lstlisting}[language=bash, caption=Montaje manual desde cliente.]
+sudo mkdir -p /mnt/wdnas
+sudo mount -t cifs //10.1.2.176/shared /mnt/wdnas -o guest
+\end{lstlisting}
+
+\section{Unificación del Almacenamiento con MergerFS}
+
+\subsection{Escenario Inicial}
+Contábamos con dos NAS independientes: el NAS 1 en 10.1.2.176 con 3.6TB disponible y share \texttt{shared}, y el NAS 2 en 10.1.2.201 con 3.6TB disponible y share \texttt{data}.
+
+\subsection{Implementación de MergerFS}
+Para unificar ambos almacenamientos en un único share de 7.2TB, implementamos MergerFS en el NAS 1: \\
+
+\begin{lstlisting}[language=bash, caption=Configuración de MergerFS en NAS 1.]
+apt-get update
+apt-get install mergerfs
+
+mkdir -p /mnt/servidor2-remoto
+mkdir -p /mnt/combinado
+
+mount -t cifs //10.1.2.201/data /mnt/servidor2-remoto -o username=root,password=root,vers=3.0
+
+mergerfs -o defaults,allow_other,category.create=epmfs /srv/dev-sataa24:/mnt/servidor2-remoto /mnt/combinado
+\end{lstlisting}
+
+\subsection{Configuración Samba para el Share Unificado}
+Añadimos la siguiente configuración al \texttt{/etc/samba/smb.conf} del NAS 1: \\
+
+\begin{lstlisting}[language=bash, caption=Share unificado en Samba.]
+[combinado-total]
+   path = /mnt/combinado
+   browseable = yes
+   read only = no
+   guest ok = yes
+   create mask = 0777
+   directory mask = 0777
+   force user = root
+\end{lstlisting}
+
+Reiniciamos el servicio Samba: \\
+\begin{lstlisting}[language=bash]
+systemctl restart smbd
+\end{lstlisting}
+
+\subsection{Configuración Permanente}
+Para hacer la configuración permanente, añadimos las siguientes líneas al \texttt{/etc/fstab} del NAS 1: \\
+
+\begin{lstlisting}[language=bash, caption=Configuración permanente en fstab.]
+//10.1.2.201/data /mnt/servidor2-remoto cifs username=root,password=root,vers=3.0 0 0
+/srv/dev-sataa24:/mnt/servidor2-remoto /mnt/combinado fuse.mergerfs defaults,allow_other,category.create=epmfs 0 0
+\end{lstlisting}
+
+\subsection{Verificación Final}
+Comprobamos el funcionamiento correcto: \\
+
+\begin{lstlisting}[language=bash, caption=Verificación del espacio unificado.]
+df -h | grep combinado
+\end{lstlisting}
+
+Y desde cualquier cliente de la red: \\
+\begin{lstlisting}[language=bash, caption=Acceso al share unificado.]
+smbclient //10.1.2.176/combinado-total -U%
+\end{lstlisting}
+
+\section{Conclusiones y Estado Actual}
+
+\subsection{Estado del Sistema}
+Actualmente contamos con un único share Samba de 7.2TB accesible desde toda la red, dos NAS funcionando de forma estable con IPs estáticas, acceso desde Proxmox y cualquier máquina virtual o contenedor Docker, y una configuración persistente que sobrevive a reinicios.
+
+\end{document}
