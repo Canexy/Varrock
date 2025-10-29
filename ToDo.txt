@@ -1,0 +1,7 @@
+[29/10/2025 15:34] Álvaro 1º ASIR: Podrias coger el documento del NAS, organizarlo un poco, explicar un poco de como funciona SAMBA, sacar alguna captura en una VM etc...
+[29/10/2025 15:35] Álvaro 1º ASIR: O informarte un poco de como funciona el RAC en mysql/mariadb
+[29/10/2025 15:35] Álvaro 1º ASIR: /oracle
+[29/10/2025 15:35] Álvaro 1º ASIR: proyecto
+[29/10/2025 15:35] Álvaro 1º ASIR: para asgbd
+[29/10/2025 15:35] Álvaro 1º ASIR: el rac
+[29/10/2025 15:36] Mario Canalejas: lo del nas preparo documento sólo, me informo sobre rac e intento algo
