@@ -1,0 +1,11 @@
+iptables -F # Tratar con cuidado, puede limpiar la conexion ssh no se
+iptables -P INPUT DROP # Dropea por defecto
+iptables -P FORWARD DROP 
+iptables -P OUTPUT ACCEPT
+iptables -A INPUT -i lo -j ACCEPT # Acceso local
+iptables -A INPUT -s 10.1.2.0/24 -j ACCEPT # Solo acepta trafico de segundo
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# a parte de cambiarle la password al usuario root, anadimos estas
+# IP tables y entradas en el archivo de configuracion de smb
+# para evitar autenticaciones desde otra subred distinta a la del aula de 2do
