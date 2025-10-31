@@ -1,0 +1,8 @@
+======================== Diario de trabajo ============================
+
+# Pasar a .md cuando no este borracho.
+
+Este documento contiene un historial con todos los cambios que
+respectan a la organizacion del proyecto, ej. comunicacion con el equipo,
+ideas que van surgiendo, reparto de trabajo. Este documento sera el que
+cubra la parte del modulo IPE2.

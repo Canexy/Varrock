@@ -1,5 +1,8 @@
 ========= IDEAS =======
 
-- Quitar tex como nombres
+  - Alvaro -
+
+- Normalizacion: Cada parte del proyecto tendra su directorio correspondiente, dentro del mismo habra un directorio para el/los archivos .tex con nombres descriptibles
+  y otro para las capturas de pantalla. (Acepto sugerencias)
 
 - Usar lo que me enseno javi de kathara para el proyecto???
