@@ -1,0 +1,14 @@
+crear simulacion, contexto, coorporativo, paleta de colores. seguridad del acceso con ldap, smb. sistema web frontal y login, peticiones de datos. Donde toca el tema de devobs con asir, integracion continua, terraform, ansible, docker, jenkings, gitlabs.
+
+metodologia cascada
+pruebas de estress
+no espiral
+escrito con los objetivos
+objetivos smart
+Enfocarlo en que nosotros queremos montar nuestra propia empresa
+integracion continua?
+montar una empresa
+- marca
+- pagina web corporativa
+- infrastructura
+crear simulacion, contexto, coorporativo, paleta de colores. seguridad del acceso con ldap, smb. sistema web frontal y login, peticiones de datos. Donde toca el^Cema de devobs con asir, integracion continua, terraform, ansible, docker, jenkings, gitlabs.
