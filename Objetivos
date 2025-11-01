@@ -1,0 +1,104 @@
+🚀 Proyecto Intermodular — TechLosenxu Solutions S.L.
+🏢 Descripción de la Empresa
+
+TechLosenxu Solutions S.L. es una empresa tecnológica especializada en ofrecer servicios de infraestructura IT y despliegue de aplicaciones educativas.
+Su misión es crear entornos virtualizados seguros, escalables y fácilmente replicables para centros educativos, academias o empresas que necesiten laboratorios de red o formación en sistemas.
+
+🎯 Objetivo General del Proyecto
+
+Diseñar y desplegar una infraestructura IT completa, segura y automatizada, capaz de alojar los servicios internos y externos de TechLosenxu, demostrando el funcionamiento de un entorno empresarial real dentro de un laboratorio virtual.
+
+🧭 Objetivos Específicos
+🧩 1. Infraestructura de Red y Virtualización
+
+Diseñar una topología de red empresarial (con VLANs, routers, firewall y DNS propio).
+
+Desplegar los servicios en contenedores Docker y orquestarlos con Kubernetes (k8s).
+
+Simular el entorno con Kathara para demostraciones académicas.
+
+Configurar una máquina Ubuntu “demo” conectada a la red para las pruebas de usuario final.
+
+🗄️ 2. Servicios Esenciales
+
+a) Servicios de Red e Internet
+
+Montar un servidor DNS interno (ej. dns.losenxu.local) que resuelva nombres de la red.
+
+Implementar reglas de firewall (IPTables) para segmentar tráfico y proteger los servicios.
+
+b) Servicios de Base de Datos
+
+Implementar un servidor SQL (MariaDB/PostgreSQL) para datos estructurados.
+
+Implementar un servidor NoSQL (MongoDB) para datos no estructurados.
+
+Configurar replicación o cluster básico para alta disponibilidad.
+
+c) Servicios Web
+
+Servidor Nginx o Apache2 alojando:
+
+Un blog institucional (WordPress o Flask).
+
+Un portal interno educativo con acceso autenticado.
+
+Una web de partidos o resultados deportivos consultando las bases de datos (mini demo).
+
+d) Autenticación y Seguridad
+
+Servidor OpenLDAP para gestión de usuarios y permisos.
+
+Integración de LDAP con los servicios web y NAS.
+
+Implementación de cifrado TLS y políticas de contraseñas.
+
+Scripts de hardening y backups automáticos.
+
+💾 3. Almacenamiento y Monitorización
+
+Servidor NFS/NAS para almacenamiento centralizado de usuarios y backups.
+
+Sistema de monitorización con Prometheus + Grafana para observar:
+
+Estado de nodos y contenedores.
+
+Métricas de red, CPU, RAM y disponibilidad de servicios.
+
+🌐 4. Despliegue, Soporte y Metodología
+
+Despliegue local inicial y, posteriormente, migración al servidor del aula con IP pública.
+
+Implementación de un sistema de soporte interno:
+
+Mini chat o ticketing system (Flask + SQLite o Zammad autoalojado).
+
+Correo interno para incidencias.
+
+Trabajo en metodología Scrum, con sprints y roles definidos.
+
+Automatización de tareas con scripts bash / Ansible / Docker Compose.
+
+🧠 5. Documentación y Presentación
+
+Uso de Excalidraw para diagramas de red y arquitectura.
+
+Documentación en Markdown + GitHub Wiki.
+
+Scripts de instalación reproducibles.
+
+Informe técnico con estándares de seguridad y gestión ITIL.
+
+💡 Ejemplo de Justificación Empresarial
+
+TechLosenxu Solutions nace para cubrir la creciente necesidad de las instituciones educativas de disponer de entornos virtualizados seguros, económicos y fácilmente desplegables para la enseñanza de redes y sistemas.
+Con una infraestructura basada en contenedores, LDAP y servicios web integrados, la empresa puede ofrecer a cada centro un entorno reproducible en cuestión de minutos.
+
+🧱 Entregables Finales del Proyecto
+Módulo	Entregable
+Redes	Topología en Kathara + configuración IP + DNS + firewall
+Sistemas	Servidores Docker/K8s configurados + scripts automatizados
+Seguridad	LDAP + TLS + IPTables + copias de seguridad
+Servicios	Web corporativa, blog, BD, monitorización y NAS
+Empresa	Logo, organigrama, roles (CEO, sysadmin, devops, soporte, etc.)
+Documentación	Memoria técnica + diagramas + guías de despliegue
