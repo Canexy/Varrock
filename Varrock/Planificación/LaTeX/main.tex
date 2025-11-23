@@ -1,0 +1,197 @@
+
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish,shorthands=off]{babel}
+
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Proyecto Intermodular}
+}
+
+%\usepackage[style=ieee]{biblatex}
+%\addbibresource{referencias.bib}
+
+\title{\textbf{Planificación Inicial} \\
+\large Proyecto Intermodular}
+\author{Mario Valiño Canalejas - Álvaro Vázquez Vázquez}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Mario Valiño Canalejas}
+\fancyhead[R]{Álvaro Vázquez Vázquez}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    
+    {\Large \textbf{Planificación Inicial}\par}
+    {\Large \textbf{Proyecto Intermodular}\par}
+    \vspace{4cm}
+    {\large \textbf{Mario Valiño Canalejas}\par}
+    {\large \textbf{Álvaro Vázquez Vázquez}\par}
+    \vspace{1cm}
+    {\large \today\par}
+\end{titlepage}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+\tableofcontents
+\clearpage
+
+\section{Introducción}
+
+El presente documento recoge la planificación inicial del Proyecto Integrado para el segundo curso del ciclo formativo de Administración de Sistemas Informáticos en Red. Su finalidad es establecer una visión ordenada del diseño que se desarrollará, definiendo la estructura general, los objetivos y la orientación empresarial del proyecto. \\
+
+El documento no pretende describir aún la implementación detallada de los sistemas, sino ofrecer una perspectiva clara del alcance técnico y organizativo que se espera cubrir durante el desarrollo del trabajo.
+
+\section{Idea Inicial}
+
+La propuesta surge de la intención de diseñar la infraestructura técnica que ofrecería una empresa dedicada a consultoría tecnológica y servicios de outsourcing. Esta empresa ficticia tendría como propósito proporcionar soporte, despliegue y modernización de sistemas a pequeñas y medianas organizaciones. \\
+
+El proyecto se centra en la creación de un entorno que represente estos servicios, permitiendo demostrar su funcionamiento mediante una simulación técnica realista. El nombre, la imagen corporativa y el logotipo se definirán en fases posteriores, dado que el enfoque actual está en consolidar la base técnica y conceptual.
+
+\section{Motivación}
+
+La motivación principal es crear un proyecto que refleje de forma práctica los conocimientos adquiridos durante el ciclo. El diseño de una infraestructura completa, orientada al ámbito profesional, permite demostrar competencias en administración de sistemas, redes, seguridad, virtualización, servicios web y automatización. \\
+
+La elaboración de este proyecto también permite establecer una base técnica que podría emplearse como referencia para futuras implementaciones reales, funcionando como un ejemplo de los servicios que la empresa ficticia podría ofrecer a sus clientes.
+
+\newpage
+
+\section{Objetivos}
+
+Los objetivos de esta planificación inicial se presentan de forma general, a la espera de su posterior adaptación a un formato más preciso mediante criterios SMART. Entre los objetivos principales se encuentran los siguientes:
+
+\begin{itemize}
+    \item Diseñar una infraestructura modular orientada a soportar servicios tecnológicos para empresas.
+    \item Simular dicha infraestructura utilizando herramientas de virtualización y contenedores.
+    \item Integrar servicios fundamentales relacionados con red, bases de datos, autenticación, monitorización, seguridad y almacenamiento.
+    \item Organizar el proyecto de forma estructurada, aplicando metodologías de trabajo reconocidas.
+    \item Consolidar conocimientos técnicos y demostrar la capacidad de diseñar soluciones completas en un entorno controlado.
+\end{itemize}
+
+\section{Finalidad y beneficios}
+
+La finalidad del proyecto es establecer la base conceptual y técnica de una empresa dedicada a proporcionar servicios tecnológicos especializados a terceros. Este diseño actuará como carta de presentación y demostración de la capacidad para desplegar, configurar y gestionar una infraestructura moderna y segura. \\
+
+Entre los beneficios del proyecto se encuentran la estandarización de servicios, la mejora de la seguridad y la capacidad de ofrecer soluciones adaptables a las necesidades de pequeñas empresas que requieran soporte en su proceso de modernización tecnológica.
+
+\section{Planificación}
+
+La organización del trabajo se gestionará mediante Trello, donde se registrarán tareas, hitos y plazos. La planificación tomará como referencia un total de 51 horas lectivas disponibles hasta la fecha de entrega, ampliadas con horas adicionales de trabajo autónomo no cuantificables. \\
+
+Se establece una primera distribución orientativa del tiempo, sujeta a ajustes conforme avance el proyecto:
+
+\begin{itemize}
+    \item Diseño inicial y documentación previa: 10 horas.
+    \item Montaje y configuración de servicios: 20 horas.
+    \item Integración y pruebas básicas: 8 horas.
+    \item Seguridad, validaciones y ajustes: 6 horas.
+    \item Documentación final y preparación de la presentación: 7 horas.
+\end{itemize}
+
+\section{Contextualización empresarial}
+
+El proyecto toma como referencia una empresa tecnológica ficticia cuyo propósito es ofrecer servicios de consultoría, soporte y modernización de infraestructuras a otras organizaciones. La empresa se orienta principalmente a pequeñas y medianas compañías que busquen implementar servicios avanzados sin disponer de recursos internos suficientes.
+La identidad corporativa, el logo y la paleta de colores se definirán en fases posteriores. Se prevé la creación de un sitio web corporativo, documentación comercial y una descripción formal de los servicios que se ofrecerían. \\
+
+La misión de la empresa se centra en aportar soluciones eficientes, seguras y adaptadas a los clientes. Su visión es convertirse en un proveedor de referencia en el despliegue y mantenimiento de arquitecturas modernas. Los valores principales serán la fiabilidad, la seguridad y la adaptabilidad.
+
+\section{Servicios a implementar}
+
+El proyecto contempla inicialmente un conjunto amplio de servicios que representan la cartera técnica ofrecida por la empresa. Todos ellos se consideran confirmados como parte del diseño preliminar; sin embargo, en función de la complejidad y del progreso del proyecto, se seleccionarán posteriormente los que serán implementados en la entrega final. \\
+
+Los servicios planificados incluyen:
+
+\begin{itemize}
+    \item Servidor DNS propio.
+    \item Sistemas de bases de datos SQL y NoSQL.
+    \item Creación de un clúster para gestión avanzada de SGBD.
+    \item Servidores web mediante Apache o Nginx.
+    \item Plataforma web y blog académico con acceso a datos.
+    \item Autenticación mediante OpenLDAP.
+    \item Implementación de cifrado TLS.
+    \item Reglas de cortafuegos e IPTables.
+    \item Servidor NFS/NAS.
+    \item Monitorización con Prometheus y visualización mediante Grafana.
+    \item Sistema de soporte o ticketing.
+    \item Uso de contenedores y orquestación mediante Docker y Kubernetes.
+    \item Herramientas DevOps: GitLab CI o Jenkins, Ansible y Terraform.
+\end{itemize}
+
+\section{Arquitectura y despliegue}
+
+La demostración del proyecto se realizará mediante simulación en un entorno controlado, utilizando Kathara, contenedores y una máquina virtual Ubuntu como nodo principal de pruebas. \\
+
+El propósito es representar de manera fiel la infraestructura que la empresa ficticia ofrecería a un cliente real, mostrando su funcionamiento y los servicios integrados.
+Aunque la ejecución completa no se desplegará sobre hardware de producción, el diseño se plantea con la intención de que pueda adaptarse fácilmente a entornos reales.
+
+\section{Metodología}
+
+El proyecto se apoyará en varias metodologías de trabajo que se encuentran aún en fase de selección. Se consideran enfoques como Scrum, GTD o el modelo en cascada, aplicando aquellos elementos que resulten más prácticos y adecuados para la organización de tareas, revisiones y entregables. \\
+
+Estas metodologías se utilizarán como núcleo para la planificación, el control del progreso y la coordinación del trabajo entre los miembros del grupo.
+Se contempla añadir pruebas de estrés en fases futuras, una vez definida la infraestructura completa.
+
+%\section{Bibliografía}
+
+%\begin{thebibliography}{9}
+
+%\bibitem{apuntes2023}
+%R. Mariscal Quintero, \emph{Apuntes de Administración de Sistemas Operativos - Unidad Didáctica 1}. Cádiz, España: I.E.S. Fernando Aguilar Quignon, 2025.
+
+%\bibitem{microsoft2023}
+%Microsoft, "Windows Services," Microsoft Documentation, 2025. [En línea]. Disponible: https://docs.microsoft.com/en-us/windows/win32/services/
+
+%\bibitem{systemd2023}
+%L. Poettering et al., "systemd System and Service Manager," Freedesktop.org, 2025. [En línea]. Disponible: https://systemd.io/
+
+%\bibitem{apache2023}
+%The Apache Software Foundation, "Apache HTTP Server Documentation," 2025. [En línea]. Disponible: https://httpd.apache.org/docs/
+
+%\bibitem{nginx2023}
+%Nginx, "NGINX Documentation," F5 Networks, 2025. [En línea]. Disponible: https://nginx.org/en/docs/
+
+%\bibitem{mxlinux2023}
+%MX Linux Community, "MX Linux User Manual," 2025. [En línea]. Disponible: https://mxlinux.org/wiki/
+
+%\bibitem{linuxmint2023}
+%Linux Mint Team, "Linux Mint User Guide," 2025. [En línea]. Disponible: https://linuxmint.com/documentation.php
+
+%\bibitem{sysvinit2023}
+%The Linux Documentation Project, "SysVinit Documentation," 2002. [En línea]. Disponible: https://tldp.org/HOWTO/HighQuality-Apps-HOWTO/boot.html
+
+%\end{thebibliography}
+
+\end{document}

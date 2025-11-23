@@ -1,5 +1,3 @@
-# Portada
-
 # Índice
 
 # 1. Introducción
@@ -42,11 +40,11 @@ La organización del trabajo se gestionará mediante Trello, donde se registrar�
 
 Se establece una primera distribución orientativa del tiempo, sujeta a ajustes conforme avance el proyecto:
 
-- Diseño inicial y documentación previa: 10 horas
-- Montaje y configuración de servicios: 20 horas
-- Integración y pruebas básicas: 8 hora
-- Seguridad, validaciones y ajustes: 6 horas
-- Documentación final y preparación de la presentación: 7 horas
+- Diseño inicial y documentación previa: 10 horas.
+- Montaje y configuración de servicios: 20 horas.
+- Integración y pruebas básicas: 8 horas.
+- Seguridad, validaciones y ajustes: 6 horas.
+- Documentación final y preparación de la presentación: 7 horas.
 
 # 7. Contextualización empresarial
 
@@ -60,19 +58,19 @@ La misión de la empresa se centra en aportar soluciones eficientes, seguras y a
 El proyecto contempla inicialmente un conjunto amplio de servicios que representan la cartera técnica ofrecida por la empresa. Todos ellos se consideran confirmados como parte del diseño preliminar; sin embargo, en función de la complejidad y del progreso del proyecto, se seleccionarán posteriormente los que serán implementados en la entrega final.
 Los servicios planificados incluyen:
 
-- Servidor DNS propio
-- Sistemas de bases de datos SQL y NoSQL
-- Creación de un clúster para gestión avanzada de SGBD
-- Servidores web mediante Apache o Nginx
-- Plataforma web y blog académico con acceso a datos
-- Autenticación mediante OpenLDAP
-- Implementación de cifrado TLS
-- Reglas de cortafuegos e IPTables
-- Servidor NFS/NAS
-- Monitorización con Prometheus y visualización mediante Grafana
-- Sistema de soporte o ticketing
-- Uso de contenedores y orquestación mediante Docker y Kubernetes
-- Herramientas DevOps: GitLab CI o Jenkins, Ansible y Terraform
+- Servidor DNS propio.
+- Sistemas de bases de datos SQL y NoSQL.
+- Creación de un clúster para gestión avanzada de SGBD.
+- Servidores web mediante Apache o Nginx.
+- Plataforma web y blog académico con acceso a datos.
+- Autenticación mediante OpenLDAP.
+- Implementación de cifrado TLS.
+- Reglas de cortafuegos e IPTables.
+- Servidor NFS/NAS.
+- Monitorización con Prometheus y visualización mediante Grafana.
+- Sistema de soporte o ticketing.
+- Uso de contenedores y orquestación mediante Docker y Kubernetes.
+- Herramientas DevOps: GitLab CI o Jenkins, Ansible y Terraform.
 
 # 9. Arquitectura y despliegue
 
@@ -87,6 +85,3 @@ El proyecto se apoyará en varias metodologías de trabajo que se encuentran aú
 
 Estas metodologías se utilizarán como núcleo para la planificación, el control del progreso y la coordinación del trabajo entre los miembros del grupo.
 Se contempla añadir pruebas de estrés en fases futuras, una vez definida la infraestructura completa.
-
-#### Pasar a LaTeX al final.
-#### Segundo borrador de documento (23/11).
